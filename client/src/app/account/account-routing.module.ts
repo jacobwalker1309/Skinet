@@ -13,7 +13,7 @@ const routes:Routes = [
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule.forChild(routes)
   ],
   exports:[RouterModule]
 })

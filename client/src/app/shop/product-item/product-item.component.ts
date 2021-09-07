@@ -1,5 +1,5 @@
 import { Basket } from './../../shared/models/basket';
-import { BasketService } from './../../basket.service';
+import { BasketService } from '../../basket/basket.service';
 import { IProduct } from 'src/app/shared/models/product';
 import { Component, Input, OnInit } from '@angular/core';
 

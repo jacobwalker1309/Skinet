@@ -1,8 +1,8 @@
 import { SharedModule } from './../shared/shared.module';
-import { BasketRoutingModule } from './../basket-routing/basket-routing.module';
+import { BasketRoutingModule } from './basket-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BasketComponent } from '../basket.component';
+import { BasketComponent } from './basket.component';
 
 
 

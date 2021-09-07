@@ -17,6 +17,7 @@ namespace API.Helpers
              services.AddScoped<IOrderService,OrderService>();
              services.AddScoped<ITokenService,TokenService>();
              services.AddScoped<IUnitOfWork,UnitOfWork>();
+             services.AddScoped<IPaymentService,PaymentService>();
              services.AddScoped(typeof(IGenericRepository<>),(typeof(GenericRepository<>)));
               services.Configure<ApiBehaviorOptions>(options =>
             {

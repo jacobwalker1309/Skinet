@@ -1,6 +1,6 @@
 import { AccountService } from './../account/account.service';
 import { Observable } from 'rxjs';
-import { BasketService } from './../basket.service';
+import { BasketService } from '../basket/basket.service';
 import { Component, OnInit } from '@angular/core';
 import { IBasket } from '../shared/models/basket';
 import { IUser } from '../shared/models/user';

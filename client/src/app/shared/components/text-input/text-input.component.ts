@@ -1,18 +1,17 @@
 import { Component, ElementRef, Input, OnInit, Self, ViewChild } from '@angular/core';
-import { ControlValueAccessor, NgControl, Validators } from '@angular/forms';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 @Component({
   selector: 'app-text-input',
   templateUrl: './text-input.component.html',
   styleUrls: ['./text-input.component.scss']
 })
-export class TextInputComponent implements OnInit,ControlValueAccessor {
+export class TextInputComponent implements OnInit, ControlValueAccessor {
+  @ViewChild('input', {static: true}) input: ElementRef;
+  @Input() type = 'text';
+  @Input() label = 'string';
 
-@ViewChild('input', {static:true}) input: ElementRef;
-@Input() type='text';
-@Input() label='text';
-
-  constructor(@Self()public controlDir: NgControl ) { 
+  constructor(@Self() public controlDir: NgControl) { 
     this.controlDir.valueAccessor = this;
   }
 
@@ -26,18 +25,20 @@ export class TextInputComponent implements OnInit,ControlValueAccessor {
     control.updateValueAndValidity();
   }
 
-  onChange(event){}
+  onChange(event) {}
 
   onTouched() {}
 
   writeValue(obj: any): void {
     this.input.nativeElement.value = obj || '';
   }
+
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
+
   registerOnTouched(fn: any): void {
-    this.onChange = fn;
+    this.onTouched = fn;
   }
- 
+
 }
