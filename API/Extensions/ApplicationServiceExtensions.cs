@@ -18,6 +18,7 @@ namespace API.Helpers
              services.AddScoped<ITokenService,TokenService>();
              services.AddScoped<IUnitOfWork,UnitOfWork>();
              services.AddScoped<IPaymentService,PaymentService>();
+             services.AddScoped<IResponseCacheService,ResponseCacheService>();
              services.AddScoped(typeof(IGenericRepository<>),(typeof(GenericRepository<>)));
               services.Configure<ApiBehaviorOptions>(options =>
             {

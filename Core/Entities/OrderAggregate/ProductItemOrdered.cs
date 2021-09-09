@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace Core.Entities.OrderAggregate
 {
     public class ProductItemOrdered
