@@ -1,3 +1,4 @@
+using System.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
+using Microsoft.Extensions.FileProviders;
 
 namespace API
 {
@@ -47,10 +49,10 @@ namespace API
                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
                 });
             });
-            services.AddDbContext<StoreContext>(x => x.UseSqlite(_configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<StoreContext>(x => x.UseNpgsql(_configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<AppIdentityDbContext>(x => {
-                x.UseSqlite(_configuration.GetConnectionString("IdentityConnection"));
+                x.UseNpgsql(_configuration.GetConnectionString("IdentityConnection"));
             });
 
              services.AddSingleton<IConnectionMultiplexer>(c =>
@@ -73,6 +75,13 @@ namespace API
 
             app.UseRouting();
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(),"Content")
+                ),RequestPath = "/content"
+            });
+
             app.UseCors("CorsPolicy");
             app.UseAuthentication();
             app.UseAuthorization();
@@ -80,6 +89,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index","Fallback");
             });
         }
     }

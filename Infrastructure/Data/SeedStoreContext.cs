@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Core.Entities;
@@ -16,9 +17,11 @@ namespace Infrastructure.Data
         {
             try 
             {
+                var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
                 if(!context.ProductBrands.Any())
                 {
-                    var brandsData = File.ReadAllText("../Infrastructure/Data/SeedData/brands.json");
+                    var brandsData = File.ReadAllText(path + @"Data/SeedData/brands.json");
 
                     var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandsData);
 
@@ -32,7 +35,7 @@ namespace Infrastructure.Data
                 }
                 if(!context.ProductTypes.Any())
                 {
-                    var typesData = File.ReadAllText("../Infrastructure/Data/SeedData/types.json");
+                    var typesData = File.ReadAllText(path + @"Data/SeedData/types.json");
 
                     var types = JsonSerializer.Deserialize<List<ProductType>>(typesData);
 
@@ -46,7 +49,7 @@ namespace Infrastructure.Data
                 }
                 if(!context.Products.Any())
                 {
-                    var productData = File.ReadAllText("../Infrastructure/Data/SeedData/products.json");
+                    var productData = File.ReadAllText(path + @"Infrastructure/Data/SeedData/products.json");
 
                     var products = JsonSerializer.Deserialize<List<Product>>(productData);
 
@@ -59,7 +62,7 @@ namespace Infrastructure.Data
                 }
                 if(!context.DeliveryMethods.Any())
                 {
-                    var dmData = File.ReadAllText("../Infrastructure/Data/SeedData/delivery.json");
+                    var dmData = File.ReadAllText(path + @"Data/SeedData/delivery.json");
 
                     var methods = JsonSerializer.Deserialize<List<DeliveryMethod>>(dmData);
 
